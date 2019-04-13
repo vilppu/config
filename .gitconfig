@@ -1,8 +1,9 @@
 [alias]
         x = !git fetch && git remote prune origin
-        z = pull
+        u = pull
         s = push
         b = branch
-        c = checkout
+        c = commit
+        o = checkout
         r = rebase
         i = status
