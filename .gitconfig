@@ -1,9 +1,14 @@
+[user]
+	name = 
+	email = 
 [alias]
-        x = !git fetch && git remote prune origin
-        u = pull
-        s = push
-        b = branch
-        c = commit
-        o = checkout
-        r = rebase
-        i = status
+    x = !git pull && git remote prune origin
+    f = fetch
+    u = pull
+    s = push
+    b = branch
+    c = commit
+    o = checkout
+    r = rebase
+    i = status
+    m = !git status | grep modified
