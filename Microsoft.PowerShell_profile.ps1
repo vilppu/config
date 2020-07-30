@@ -1,3 +1,6 @@
+# PowerShell Core: ~\Documents\PowerShell 
+# Windows PowerShell: ~\Documents\WindowsPowerShell
+
 function Get-Branch () {
 
     $branch = git rev-parse --abbrev-ref HEAD
