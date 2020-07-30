@@ -5,7 +5,7 @@ function Get-Branch () {
 
     $branch = git rev-parse --abbrev-ref HEAD
 
-    if ($branch -eq "HEAD") {        
+    if ($branch -eq "HEAD") {
         $sha = git rev-parse --short HEAD
         if ($sha) {
             return @{
@@ -27,31 +27,27 @@ function Get-Branch () {
         }
     }
     else {
-        return @{
-            Branch = "no branch";
-            Color  = "yellow"
-        }
+        return @{}
     }
 }
 
-function Write-Branch ($branch) {   
-    Write-Host " ($($branch.Branch))" -ForegroundColor $branch.Color    
+function Write-Branch ($branch) {
+    Write-Host " ($($branch.Branch))" -ForegroundColor $branch.Color
 }
 
 function prompt {
+    $branch = Get-Branch
     $currentLocation = $executionContext.SessionState.Path.CurrentLocation
     $currentDirectory = (Split-Path -Path ($currentLocation) -Leaf)
-    $currentPath = "$($currentLocation)"
-    
-    if (Test-Path .git) {
-        $branch = Get-Branch
-        Write-Host $currentPath -NoNewline -ForegroundColor "green"
+
+    Write-Host $currentLocation -NoNewline -ForegroundColor "green"
+    $host.ui.RawUI.WindowTitle = $currentDirectory
+
+    if ($branch.Branch) {
         Write-Branch ($branch)
-        $host.ui.RawUI.WindowTitle = $currentDirectory
     }
-    else {        
-        Write-Host $currentPath -ForegroundColor "green"
-        $host.ui.RawUI.WindowTitle = $currentDirectory
+    else {
+        Write-Host
     }
     
     return "$('>' * ($nestedPromptLevel + 1)) "
